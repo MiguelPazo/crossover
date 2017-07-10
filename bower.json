@@ -19,7 +19,8 @@
     "angular-ui-router": "~0.2.18",
     "materialize": "~0.97.5",
     "angular-materialize": "~0.1.4",
-    "angular-google-maps": "^2.4.1"
+    "angular-google-maps": "^2.4.1",
+    "dropzone": "^4.3.0"
   },
   "devDependencies": {
     "angular-simple-logger": "^0.1.7"

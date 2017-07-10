@@ -10,7 +10,8 @@ elixir(function (mix) {
         'resources/assets/bower_components/angular-materialize/src/angular-materialize.js',
         'resources/assets/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js',
         'resources/assets/bower_components/lodash/dist/lodash.js',
-        'resources/assets/bower_components/angular-google-maps/dist/angular-google-maps.js'
+        'resources/assets/bower_components/angular-google-maps/dist/angular-google-maps.js',
+        'resources/assets/bower_components/dropzone/dist/min/dropzone.min.js'
     ], 'public/js/vendor.js');
 
     mix.combine([
