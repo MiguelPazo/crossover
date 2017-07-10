@@ -3,12 +3,23 @@ app.controller('eventController', ['$scope', '$stateParams', 'eventService', 'st
         $scope.event;
         $scope.lstStands;
         $scope.standSelected;
+        $scope.lstDocuments;
 
         $scope.standDetails = function (standId) {
             standService.fetchOne(standId).then(function (response) {
                 $scope.standSelected = response.data;
                 $('#btn_stand_details').sideNav('show');
+
+                if ($scope.standSelected.status == 'reserved') {
+                    standService.fetchDocuments(standId).then(function (response) {
+                        $scope.lstDocuments = response.data;
+                    });
+                }
             });
+        }
+
+        $scope.downloadDocument = function (document) {
+            location.href = BASE_URL + 'api/document/' + document.id + '/download';
         }
 
         $scope.isReserved = function (status) {

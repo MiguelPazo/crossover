@@ -21,7 +21,40 @@
                 <input id="address" type="text" maxlength="45" data-length="45" ng-model="stand.address">
                 <label for="address">Address</label>
             </div>
-            <input type="submit" class="btn" value="Reserve">
+            <div class="input-field col s12">
+                <label for="address" class="active">Logo company</label>
+
+                <div id="upload_logo">
+                    <p><b>Logo:</b>[[ stand.logo.name ]]</p>
+                </div>
+                <a id="btn_upload_logo" class="btn btn-separate">Upload logo</a>
+            </div>
+
+            <div class="input-field col s12">
+                <label for="address" class="active">Marketing documents</label>
+
+                <div id="upload_files">
+                    <table class="striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Document</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="document in lstDocuments track by $index">
+                            <td>[[ $index + 1 ]]</td>
+                            <td>[[ document.name ]]</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a id="btn_upload_files" class="btn btn-separate">Upload documents</a>
+            </div>
+            <div class="input-field col s12 right-align" ng-if="!uploading">
+                <input type="submit" class="btn" value="Reserve">
+            </div>
         </div>
     </form>
 </div>
+<div class="preview-upload" style="display: none;"></div>

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Stand extends Model
+class Document extends Model
 {
     protected $guarded = ['id'];
     public $timestamps = false;
@@ -14,9 +14,9 @@ class Stand extends Model
         return $query->where('id', $id);
     }
 
-    public function scopeEventId($query, $id)
+    public function scopeCompanyId($query, $id)
     {
-        return $query->where('event_id', $id);
+        return $query->where('company_id', $id);
     }
 
     public function company()

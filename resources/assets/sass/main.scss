@@ -68,14 +68,9 @@ body {
 }
 
 .stands div {
-  background: #000000;
   border: 1px solid #000000;
   cursor: pointer;
-  height: 50px;
-}
-
-.stands div:hover {
-  background: #3c3c3c !important;
+  height: 150px;
 }
 
 .stands div span {
@@ -85,6 +80,34 @@ body {
 
 .stands div.free {
   background: #ffffff;
-  height: 50px;
 }
 
+.stands div.free:hover {
+  background: #3c3c3c !important;
+}
+
+.photo_section {
+  background: #000000;
+  padding-bottom: 60%;
+  width: 100%;
+}
+
+.btn-separate {
+  margin-bottom: 15px;
+}
+
+.documents {
+  cursor: pointer;
+}
+
+.documents:hover {
+  background: #d7ccc8;
+}
+
+#upload_files {
+  margin: 15px 0;
+}
+
+#upload_logo {
+  margin-bottom: 15px;
+}

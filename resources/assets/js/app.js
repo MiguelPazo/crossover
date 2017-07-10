@@ -1,3 +1,7 @@
+String.prototype.trim = function () {
+    return this.replace(/^\s+|\s+$/g, "");
+}
+
 var cancelAjax = false;
 var app = angular.module('events', ['ui.router', 'ui.materialize', 'uiGmapgoogle-maps']);
 
@@ -27,40 +31,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$interpolateProvider', '$ht
                 'response': function (response) {
                     $rootScope.loading = false;
 
-                    if (!isView(response.config)) {
-                        if (response.data.success != undefined) {
-                            var showMessageForm = (response.data.message != null) ? true : false;
-
-                            if (showMessageForm) {
-                                $rootScope.showContextualMessage(!response.data.success, response.data.message);
-                            }
-
-                            if (!response.data.success) {
-                                return $q.reject(response);
-                            }
-                        }
-                    }
-
                     return response;
                 },
                 'responseError': function (response) {
-                    switch (response.status) {
-                        case 500:
-                            alert('500');
-                            // $('#modal_general_error').openModal({dismissible: false});
-                            break;
-                        case 401:
-                            cancelAjax = true;
-                            alert('401');
-                            // $('#modal_session').openModal({dismissible: false});
-                            break;
-                        case 422:
-                            alert('422');
-                            break;
-                        default:
-                            alert(response.status);
-                            break;
-                    }
+                    $rootScope.showContextualMessage(true, "Error processing request with code: " + response.status);
 
                     return $q.reject(response);
                 }
@@ -84,7 +58,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$interpolateProvider', '$ht
                 controller: 'eventController'
             })
             .state('stand_reserve', {
-                url: '/event/stand/:id',
+                url: '/event/stand/:idEvent/:id',
                 templateUrl: BASE_URL + 'view/stand',
                 controller: 'standController'
             });
@@ -102,6 +76,18 @@ app.run(['$rootScope', '$timeout',
         $rootScope.messageSuccess = false;
         $rootScope.messageForm = null;
 
+        $rootScope.getImage = function (standId) {
+            return BASE_URL + 'api/stand/' + standId + '/photo';
+        }
+
+        $rootScope.getLogoCompany = function (companyId) {
+            if (companyId != 0) {
+                return BASE_URL + 'api/company/' + companyId + '/logo';
+            } else {
+                return false;
+            }
+        }
+
         $rootScope.showContextualMessage = function (error, message) {
             $rootScope.contextualMessage = true;
             $rootScope.messageSuccess = !error;
@@ -110,31 +96,6 @@ app.run(['$rootScope', '$timeout',
             $timeout(function () {
                 $rootScope.contextualMessage = false;
             }, 3000);
-        }
-
-        $rootScope.getDate = function (date) {
-            if (date != undefined) {
-                var day = date.substring(8, 10);
-                var month = date.substring(5, 7);
-                var year = date.substring(0, 4);
-
-                return day + '/' + month + '/' + year;
-            } else {
-                return '--';
-            }
-        }
-
-        $rootScope.getDateFull = function (date) {
-            if (date != undefined) {
-                var day = date.substring(8, 10);
-                var month = date.substring(5, 7);
-                var year = date.substring(0, 4);
-                var time = date.substring(11);
-
-                return day + '/' + month + '/' + year + ' ' + time;
-            } else {
-                return '--';
-            }
         }
     }
 ]);

@@ -27,7 +27,7 @@ class EventController extends Controller
 
     public function getStands($id)
     {
-        $oEvent = Stand::eventId($id)->get(['id', 'status', 'price']);
+        $oEvent = Stand::eventId($id)->get(['id', 'status', 'price', 'company_id']);
 
         if ($oEvent) {
             return response()->json($oEvent->toArray());
