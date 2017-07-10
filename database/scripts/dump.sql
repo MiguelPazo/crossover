@@ -40,7 +40,8 @@ DROP TABLE IF EXISTS `stands`;
 
 CREATE TABLE `stands` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `status` enum('free','hired') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'free',
+  `number` tinyint(4) NOT NULL,
+  `status` enum('free','reserved') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'free',
   `photo` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `price` double NOT NULL DEFAULT '0',
   `company` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -60,7 +61,7 @@ CREATE TABLE `stands` (
 
 /*Data for the table `stands` */
 
-insert  into `stands`(`id`,`status`,`photo`,`price`,`company`,`phone`,`email`,`address`,`logo`,`documents`,`event_id`,`user_id`) values (1,'free','1.jpg',1500,NULL,NULL,NULL,NULL,NULL,NULL,1,0),(2,'free','2.jpg',1200,NULL,NULL,NULL,NULL,NULL,NULL,1,0),(3,'free','3.jpg',598,NULL,NULL,NULL,NULL,NULL,NULL,1,0),(4,'free','4.jpg',1326,NULL,NULL,NULL,NULL,NULL,NULL,1,0),(5,'free','5.jpg',546,NULL,NULL,NULL,NULL,NULL,NULL,1,0),(6,'free','6.jpg',136,NULL,NULL,NULL,NULL,NULL,NULL,1,0),(7,'free','7.jpg',789,NULL,NULL,NULL,NULL,NULL,NULL,1,0),(8,'free','8.jpg',456,NULL,NULL,NULL,NULL,NULL,NULL,2,0),(9,'free','8.jpg',132,NULL,NULL,NULL,NULL,NULL,NULL,2,0),(10,'free','9.jpg',1569,NULL,NULL,NULL,NULL,NULL,NULL,2,0),(11,'free','10.jpg',1475,NULL,NULL,NULL,NULL,NULL,NULL,2,0),(12,'free','11.jpg',1200,NULL,NULL,NULL,NULL,NULL,NULL,2,0),(13,'free','12.jpg',369,NULL,NULL,NULL,NULL,NULL,NULL,2,0),(14,'free','13.jpg',456,NULL,NULL,NULL,NULL,NULL,NULL,2,0),(15,'free','14.jpg',654,NULL,NULL,NULL,NULL,NULL,NULL,3,0),(16,'free','15.jpg',1582,NULL,NULL,NULL,NULL,NULL,NULL,3,0),(17,'free','16.jpg',1600,NULL,NULL,NULL,NULL,NULL,NULL,3,0),(18,'free','17.jpg',1396,NULL,NULL,NULL,NULL,NULL,NULL,3,0),(19,'free','18.jpg',1625,NULL,NULL,NULL,NULL,NULL,NULL,3,0),(20,'free','19.jpg',1500,NULL,NULL,NULL,NULL,NULL,NULL,3,0),(21,'free','20.jpg',1200,NULL,NULL,NULL,NULL,NULL,NULL,3,0),(22,'free','21.jpg',1965,NULL,NULL,NULL,NULL,NULL,NULL,3,0);
+insert  into `stands`(`id`,`number`,`status`,`photo`,`price`,`company`,`phone`,`email`,`address`,`logo`,`documents`,`event_id`,`user_id`) values (1,1,'free','1.jpg',1500,NULL,NULL,NULL,NULL,NULL,NULL,1,0),(2,2,'free','2.jpg',1200,NULL,NULL,NULL,NULL,NULL,NULL,1,0),(3,3,'reserved','3.jpg',598,NULL,NULL,NULL,NULL,NULL,NULL,1,0),(4,4,'free','4.jpg',1326,NULL,NULL,NULL,NULL,NULL,NULL,1,0),(5,5,'free','5.jpg',546,NULL,NULL,NULL,NULL,NULL,NULL,1,0),(6,6,'free','6.jpg',136,NULL,NULL,NULL,NULL,NULL,NULL,1,0),(7,7,'free','7.jpg',789,NULL,NULL,NULL,NULL,NULL,NULL,1,0),(8,1,'free','8.jpg',456,NULL,NULL,NULL,NULL,NULL,NULL,2,0),(9,2,'free','8.jpg',132,NULL,NULL,NULL,NULL,NULL,NULL,2,0),(10,3,'free','9.jpg',1569,NULL,NULL,NULL,NULL,NULL,NULL,2,0),(11,4,'free','10.jpg',1475,NULL,NULL,NULL,NULL,NULL,NULL,2,0),(12,5,'free','11.jpg',1200,NULL,NULL,NULL,NULL,NULL,NULL,2,0),(13,6,'free','12.jpg',369,NULL,NULL,NULL,NULL,NULL,NULL,2,0),(14,7,'free','13.jpg',456,NULL,NULL,NULL,NULL,NULL,NULL,2,0),(15,1,'free','14.jpg',654,NULL,NULL,NULL,NULL,NULL,NULL,3,0),(16,2,'free','15.jpg',1582,NULL,NULL,NULL,NULL,NULL,NULL,3,0),(17,3,'free','16.jpg',1600,NULL,NULL,NULL,NULL,NULL,NULL,3,0),(18,4,'free','17.jpg',1396,NULL,NULL,NULL,NULL,NULL,NULL,3,0),(19,5,'free','18.jpg',1625,NULL,NULL,NULL,NULL,NULL,NULL,3,0),(20,6,'free','19.jpg',1500,NULL,NULL,NULL,NULL,NULL,NULL,3,0),(21,7,'free','20.jpg',1200,NULL,NULL,NULL,NULL,NULL,NULL,3,0),(22,8,'free','21.jpg',1965,NULL,NULL,NULL,NULL,NULL,NULL,3,0);
 
 /*Table structure for table `users` */
 
