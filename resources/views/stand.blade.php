@@ -1,0 +1,1 @@
+<h1>Stand [[ stand.number ]]</h1>

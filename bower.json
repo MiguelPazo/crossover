@@ -1,0 +1,27 @@
+{
+  "name": "crossover_events",
+  "version": "1.0.0",
+  "authors": [
+    "Miguel Pazo Sánchez <miguel.ps19@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.2.2",
+    "angular": "~1.4.7",
+    "angular-ui-router": "~0.2.18",
+    "materialize": "~0.97.5",
+    "angular-materialize": "~0.1.4",
+    "angular-google-maps": "^2.4.1"
+  },
+  "devDependencies": {
+    "angular-simple-logger": "^0.1.7"
+  }
+}
