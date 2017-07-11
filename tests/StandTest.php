@@ -102,21 +102,30 @@ class StandTest extends TestCase
     }
 
     /**
-     * Test logo company
+     * Test company logo
      *
      * @return void
      */
     public function testGetLogo()
     {
-        $oCompany = \App\Company::first();
+        $oCompany = \App\Company::orderBy('id', 'desc')->first();
 
-        if ($oCompany) {
-            $this->json('GET', "/api/company/{$oCompany->id}/logo")
+        $this->json('GET', "/api/company/{$oCompany->id}/logo")
+            ->assertResponseOk();
+    }
+
+    /**
+     * Test company documents
+     *
+     * @return void
+     */
+    public function testGetDownload()
+    {
+        $oCompany = \App\Company::with('documents')->orderBy('id', 'desc')->first();
+
+        foreach ($oCompany->documents as $key => $oDocument) {
+            $this->json('GET', "/api/document/{$oDocument->id}/download")
                 ->assertResponseOk();
-        } else {
-            $this->json('GET', "/api/company/{$oCompany->id}/logo")
-                ->assertResponseStatus(404);
         }
-
     }
 }
