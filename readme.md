@@ -10,7 +10,7 @@ System for reserve stands in events showed in a map
 
 ## Deployment
 1. Deploy DB
-Import DB from /database/scripts/dump.sql and configure access in .env file in root directory app.
+Creqate DB and import DB from /database/scripts/dump.sql and configure access in .env file in root directory app.
 
 2. Configure mailing
 Configure your SMT config in .env, by default it configured with mailgun:
