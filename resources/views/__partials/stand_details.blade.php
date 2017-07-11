@@ -11,7 +11,7 @@
 
         <div ng-if="standSelected.status == 'reserved'">
             <h4>[[ company.name ]]</h4>
-            <p><b>Email:</b> [[ company.email ]]</p>
+            <p><b>Email:</b> [[ company.user.email ]]</p>
             <p><b>Phone:</b> [[ company.phone ]]</p>
             <p><b>Address:</b> [[ company.address ]]</p>
             <p>Marketing documents:</p>

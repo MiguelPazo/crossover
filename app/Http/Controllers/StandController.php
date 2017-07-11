@@ -184,7 +184,7 @@ class StandController extends Controller
         $oStand = Stand::id($id)->first(['id', 'company_id']);
 
         if ($oStand) {
-            $oCompany = $oStand->company()->with('documents')->first();
+            $oCompany = $oStand->company()->with(['documents', 'user'])->first();
 
             return response()->json($oCompany->toArray());
         }
