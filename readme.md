@@ -10,7 +10,7 @@ System for reserve stands in events showed in a map
 
 ## Deployment
 1. Deploy DB
-Creqate DB and import DB from /database/scripts/dump.sql and configure access in .env file in root directory app.
+Create DB and import DB from /database/scripts/dump.sql and configure access in .env file in root directory app.
 
 2. Configure mailing
 Configure your SMT config in .env, by default it configured with mailgun:
@@ -78,6 +78,12 @@ php artisan serve
 If you deploy it in linux, you should be changed permissions on the storage folder:
 ```
 chmod 775 storage -R
+```
+
+## Unit test
+Run this command in root directory project
+```
+ ./vendor/bin/phpunit
 ```
 
 ## Live version
