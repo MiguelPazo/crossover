@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class DocumentController extends Controller
 {
+    /**
+     * Donwload a document by its id
+     *
+     * @param $id Id of document
+     * @return mixed
+     */
     public function getDownload($id)
     {
         $oDocument = Document::id($id)->first(['name', 'code']);

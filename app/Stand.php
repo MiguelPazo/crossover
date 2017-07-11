@@ -23,4 +23,9 @@ class Stand extends Model
     {
         return $this->belongsTo('App\Company');
     }
+
+    public function event()
+    {
+        return $this->belongsTo('App\Event');
+    }
 }

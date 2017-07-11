@@ -29,7 +29,7 @@
 </div>
 <![endif]-->
 
-<div class="container">
+<div class="main-container">
     <div ui-view></div>
 </div>
 

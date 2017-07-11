@@ -3,7 +3,7 @@ app.controller('eventController', ['$scope', '$stateParams', 'eventService', 'st
         $scope.event;
         $scope.lstStands;
         $scope.standSelected;
-        $scope.lstDocuments;
+        $scope.company;
 
         $scope.standDetails = function (standId) {
             standService.fetchOne(standId).then(function (response) {
@@ -11,8 +11,9 @@ app.controller('eventController', ['$scope', '$stateParams', 'eventService', 'st
                 $('#btn_stand_details').sideNav('show');
 
                 if ($scope.standSelected.status == 'reserved') {
-                    standService.fetchDocuments(standId).then(function (response) {
-                        $scope.lstDocuments = response.data;
+                    standService.fetchFullDetails(standId).then(function (response) {
+                        $scope.company = response.data;
+                        console.log($scope.company);
                     });
                 }
             });

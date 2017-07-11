@@ -8,9 +8,9 @@ app.service('standService', ['$http', function ($http) {
         });
     }
 
-    this.fetchDocuments = function (id) {
+    this.fetchFullDetails = function (id) {
         return $http({
-            url: BASE_URL + 'api/stand/' + id + '/documents',
+            url: BASE_URL + 'api/stand/' + id + '/full-details',
             method: 'GET'
         }).success(function (response) {
             return response;

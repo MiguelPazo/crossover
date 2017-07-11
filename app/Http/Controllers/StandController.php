@@ -3,14 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Document;
+use App\Jobs\SendReport;
+use App\Mail\RegisterMail;
 use App\Stand;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class StandController extends Controller
 {
+    /**
+     * Show details of a stand
+     *
+     * @param $id Stand id
+     * @return \Illuminate\Http\JsonResponse Stand details
+     */
     public function getDetails($id)
     {
         $oStand = Stand::id($id)->first(['id', 'number', 'price', 'status', 'event_id']);
@@ -22,6 +31,12 @@ class StandController extends Controller
         }
     }
 
+    /**
+     * Show a stand's photo
+     *
+     * @param $id Stand id
+     * @return mixed Stand real photo
+     */
     public function getPhoto($id)
     {
         $oStand = Stand::id($id)->first(['photo']);
@@ -39,6 +54,13 @@ class StandController extends Controller
         }
     }
 
+    /**
+     * Upload a document and generate a new unique code for it
+     * (don't saved in DB)
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse New unique document code
+     */
     public function postUploadDocuments(Request $request)
     {
         try {
@@ -54,6 +76,13 @@ class StandController extends Controller
         }
     }
 
+    /**
+     * Upload a logo of company and generate a new unique code for it
+     * (don't saved in DB)
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse New unique image code
+     */
     public function postUploadLogo(Request $request)
     {
         try {
@@ -69,6 +98,12 @@ class StandController extends Controller
         }
     }
 
+    /**
+     * Confirm reservation, send mail to company and job report to admin
+     *
+     * @param Request $request
+     * @return Http code
+     */
     public function postSave(Request $request)
     {
         try {
@@ -109,7 +144,7 @@ class StandController extends Controller
             ]);
 
             $oCompany = $oUser->company()->create([
-                'company' => $company,
+                'name' => $company,
                 'phone' => $phone,
                 'address' => $address,
                 'logo' => $logo['code']
@@ -117,7 +152,16 @@ class StandController extends Controller
 
             $oCompany->documents()->createMany($documents);
 
-            Stand::id($id)->update(['status' => 'reserved', 'company_id' => $oCompany->id]);
+            $oStand = Stand::with('event')->id($id)->first();
+
+            $oStand->status = 'reserved';
+            $oStand->company_id = $oCompany->id;
+            $oStand->event->stands_reserved = $oStand->event->stands_reserved + 1;
+            $oStand->push();
+
+            Mail::to($oUser->email)->queue(new RegisterMail($oUser, $oCompany, $oStand->event));
+
+            dispatch(new SendReport());
 
             DB::commit();
 
@@ -129,14 +173,20 @@ class StandController extends Controller
         }
     }
 
-    public function getDocuments($id)
+    /**
+     * Show full details of a reserved stand
+     *
+     * @param $id Stand id
+     * @return \Illuminate\Http\JsonResponse Details of reserved stand
+     */
+    public function getFullDetails($id)
     {
-        $oStand = Stand::id($id)->first(['company_id']);
+        $oStand = Stand::id($id)->first(['id', 'company_id']);
 
         if ($oStand) {
-            $lstDocuments = Document::companyId($oStand->company_id)->get();
+            $oCompany = $oStand->company()->with('documents')->first();
 
-            return response()->json($lstDocuments->toArray());
+            return response()->json($oCompany->toArray());
         }
 
         abort(400);

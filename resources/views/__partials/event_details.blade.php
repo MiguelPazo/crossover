@@ -7,7 +7,7 @@
         <p><b>To:</b> [[ eventSelected.end_date ]]</p>
         <hr>
         <p>[[ eventSelected.stands ]] free</p>
-        <p>[[ eventSelected.stands_hired ]] hired</p>
+        <p>[[ eventSelected.stands_reserved ]] reserved</p>
         <a ui-sref="event({ id: eventSelected.id })" class="btn">Book your place</a>
     </div>
 

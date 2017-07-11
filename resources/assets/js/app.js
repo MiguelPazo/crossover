@@ -2,7 +2,6 @@ String.prototype.trim = function () {
     return this.replace(/^\s+|\s+$/g, "");
 }
 
-var cancelAjax = false;
 var app = angular.module('events', ['ui.router', 'ui.materialize', 'uiGmapgoogle-maps']);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$interpolateProvider', '$httpProvider', 'uiGmapGoogleMapApiProvider',
@@ -15,22 +14,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$interpolateProvider', '$ht
         });
 
         $httpProvider.interceptors.push(['$q', '$rootScope', function ($q, $rootScope) {
-            var isView = function (config) {
-                return config.url.indexOf('view') != -1 || config.headers.Accept.indexOf('html') != -1;
-            };
-
             return {
                 'request': function (request) {
-                    if (!cancelAjax) {
-                        $rootScope.loading = true;
-                        return request;
-                    }
-
-                    return false;
+                    return request;
                 },
                 'response': function (response) {
-                    $rootScope.loading = false;
-
                     return response;
                 },
                 'responseError': function (response) {

@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+    /**
+     * Show logo of a company
+     *
+     * @param $id Id of company
+     * @return mixed
+     */
     public function getLogo($id)
     {
         $oCompany = Company::id($id)->first(['logo']);

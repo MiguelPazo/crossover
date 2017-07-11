@@ -10,9 +10,13 @@
            ng-if="!isReserved(standSelected.status)">Reserve</a>
 
         <div ng-if="standSelected.status == 'reserved'">
+            <h4>[[ company.name ]]</h4>
+            <p><b>Email:</b> [[ company.email ]]</p>
+            <p><b>Phone:</b> [[ company.phone ]]</p>
+            <p><b>Address:</b> [[ company.address ]]</p>
             <p>Marketing documents:</p>
-            <table class="striped">
-                <tr ng-repeat="document in lstDocuments track by $index" ng-click="downloadDocument(document)"
+            <table>
+                <tr ng-repeat="document in company.documents track by $index" ng-click="downloadDocument(document)"
                     class="documents">
                     <td width="15">[[ $index + 1 ]]</td>
                     <td>[[ document.name ]]</td>
@@ -22,6 +26,6 @@
     </div>
 
     <div ng-if="standSelected == null">
-        <h4>Select a free stand</h4>
+        <h4>Select a stand</h4>
     </div>
 </aside>
