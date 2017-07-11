@@ -10,7 +10,7 @@ class CompanyController extends Controller
     /**
      * Show logo of a company
      *
-     * @param $id Id of company
+     * @param $id Company id
      * @return mixed
      */
     public function getLogo($id)

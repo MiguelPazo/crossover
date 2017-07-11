@@ -117,7 +117,7 @@ class StandController extends Controller
                 'lstDocuments' => 'required',
             ]);
 
-            $id = $request->get('id');
+            $id = $request->get('id'); //Stand id
             $company = $request->get('company');
             $email = $request->get('email');
             $phone = $request->get('phone');

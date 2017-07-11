@@ -10,7 +10,7 @@ class DocumentController extends Controller
     /**
      * Donwload a document by its id
      *
-     * @param $id Id of document
+     * @param $id Document id
      * @return mixed
      */
     public function getDownload($id)
